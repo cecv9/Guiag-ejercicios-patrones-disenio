@@ -1,0 +1,3 @@
+# Archivos generados durante la ejecución
+*.txt
+!README.txt
