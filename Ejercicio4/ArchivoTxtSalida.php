@@ -16,7 +16,12 @@ class ArchivoTxtSalida implements SalidaStrategy
     public function mostrar(string $mensaje): string
     {
         $linea = date('Y-m-d H:i:s') . " - " . $mensaje . "\n";
-        file_put_contents($this->nombreArchivo, $linea, FILE_APPEND);
+        $resultado = file_put_contents($this->nombreArchivo, $linea, FILE_APPEND);
+        if ($resultado === false) {
+            $error = "[ARCHIVO TXT] Error al guardar en " . $this->nombreArchivo . ": " . $mensaje;
+            echo $error . "\n";
+            return $error;
+        }
         echo "[ARCHIVO TXT] Mensaje guardado en " . $this->nombreArchivo . ": " . $mensaje . "\n";
         return $linea;
     }
